@@ -1,16 +1,45 @@
-BoxLayout:
-    orientation: "vertical"
+#:import ScreenManager kivy.uix.screenmanager.ScreenManager
+#:import Screen kivy.uix.screenmanager.Screen
+
+
+ScreenManager:
+    board_screen: _board_screen
+    vote_screen: _vote_screen
+
+    BoardScreen:
+        id: _board_screen
+        name: "board_screen"
+
+    VoteScreen:
+        id: _vote_screen
+        name: "vote_screen"
+
+<BoardScreen@Screen>:
     board: _board
 
-    ActionBar:
-        ActionView:
-            ActionPrevious:
-                title: 'Codinomes'
+    BoxLayout:
+        orientation: "vertical"
 
-    Board:
-        id: _board
+        ActionBar:
+            ActionView:
+                ActionPrevious:
+                    title: 'Codinomes'
+                    on_press: root.manager.current = "vote_screen"
 
+        Board:
+            id: _board
 
 <Board@GridLayout>:
     lines: 5
     cols: 5
+
+<VoteScreen@Screen>:
+    BoxLayout:
+        orientation: "vertical"
+
+        Button:
+            text: "Outra palavra"
+            on_press: root.manager.current = "board_screen"
+
+        Button:
+            text: "Passar"
