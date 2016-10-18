@@ -5,6 +5,7 @@
 ScreenManager:
     board_screen: _board_screen
     vote_screen: _vote_screen
+    wait_screen: _wait_screen
 
     BoardScreen:
         id: _board_screen
@@ -13,6 +14,10 @@ ScreenManager:
     VoteScreen:
         id: _vote_screen
         name: "vote_screen"
+
+    WaitScreen:
+        id: _wait_screen
+        name: "wait_screen"
 
 <BoardScreen@Screen>:
     board: _board
@@ -43,3 +48,16 @@ ScreenManager:
 
         Button:
             text: "Passar"
+            on_press: root.manager.current = "wait_screen"
+
+<WaitScreen@Screen>:
+    BoxLayout:
+        orientation: "vertical"
+
+        Label:
+            text: "Turno do outro time. Aguarde."
+
+        Button:
+            text: "Outra palavra"
+            on_press: root.manager.current = "board_screen"
+
