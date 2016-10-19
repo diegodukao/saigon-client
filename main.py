@@ -11,6 +11,12 @@ TEAMS = [
     "red",
 ]
 
+ALIGNMENTS = [
+    (1, 0, 0, 1),
+    (0, 0, 1, 1),
+    (1, 1, 1, 1),
+]
+
 
 class Board(GridLayout):
 
@@ -18,8 +24,21 @@ class Board(GridLayout):
         super().__init__(**kwargs)
 
         for i in range(25):
-            button = ToggleButton(text="palavra", group="words")
+            button = WordButton(text="palavra", group="words")
             self.add_widget(button)
+
+
+class WordButton(ToggleButton):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        self.background_disabled_down = ""
+        self.background_disabled_normal = ""
+
+    def on_press(self):
+        self.disabled = True
+        self.background_color = choice(ALIGNMENTS)
 
 
 class SaigonClient(App):
