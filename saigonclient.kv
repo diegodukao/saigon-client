@@ -21,6 +21,7 @@ ScreenManager:
 
 <BoardScreen@Screen>:
     board: _board
+    team_label: _team_label
 
     BoxLayout:
         orientation: "vertical"
@@ -30,13 +31,14 @@ ScreenManager:
                 ActionPrevious:
                     title: 'Codinomes'
                     on_press: root.manager.current = "vote_screen"
+                ActionButton:
+                    id: _team_label
+                    text: "Equipe"
 
         Board:
             id: _board
-
-<Board@GridLayout>:
-    lines: 5
-    cols: 5
+            lines: 5
+            cols: 5
 
 <VoteScreen@Screen>:
     BoxLayout:
