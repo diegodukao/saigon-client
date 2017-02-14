@@ -1,4 +1,5 @@
 from kivy.app import App
+from kivy.network.urlrequest import UrlRequest
 from kivy.properties import StringProperty
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.gridlayout import GridLayout
@@ -19,13 +20,16 @@ ALIGNMENTS = [
 
 
 class Board(GridLayout):
+    def populate_board(self, req, result):
+        cards = result['words']
+        for card in cards:
+            button = WordButton(text=card["word"], group="words")
+            self.add_widget(button)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        for i in range(25):
-            button = WordButton(text="palavra", group="words")
-            self.add_widget(button)
+        UrlRequest("http://localhost:8000/board", self.populate_board)
 
 
 class WordButton(ToggleButton):
